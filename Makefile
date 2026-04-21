@@ -1,5 +1,5 @@
 BINARY := service-wait
-PKG    := github.com/mafigit/service-wait/cmd/service_wait
+PKG    := github.com/mafigit/service-wait/cmd/service-wait
 BIN    := bin/$(BINARY)
 PREFIX ?= $(HOME)/.local
 
