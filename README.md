@@ -34,6 +34,20 @@ make install      # installs to ~/.local/bin
 docker build -t service-wait .
 ```
 
+### Use in a Docker image (multi-stage)
+
+Copy the binary into your own image using a multi-stage build:
+
+```dockerfile
+FROM ghcr.io/mafigit/service-wait:v0.0.1@sha256:f76661dd68c5bfef49712400d8cd64d46e4f8ab932f644d628b4cee0294b1e28 AS service-wait
+
+FROM alpine:3
+
+COPY --from=service-wait /ko-app/service-wait /usr/local/bin/service-wait
+
+ENTRYPOINT ["service-wait"]
+```
+
 ## Usage
 
 ```bash
