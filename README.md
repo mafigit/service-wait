@@ -100,3 +100,7 @@ make fmt      # format code
 make vet      # run go vet
 make tidy     # tidy go modules
 ```
+
+## License
+
+[MIT](LICENSE)
