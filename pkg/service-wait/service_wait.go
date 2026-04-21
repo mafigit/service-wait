@@ -186,7 +186,7 @@ func ProbeHttpEndpoint(ctx context.Context, config *Config) error {
 	if config.URL != "" {
 		urls = []string{config.URL}
 	}
-	if config.URLS != nil && len(config.URLS) > 0 {
+	if len(config.URLS) > 0 {
 		urls = append(urls, config.URLS...)
 	}
 
@@ -321,7 +321,7 @@ func validateConfig(config *Config) error {
 		}
 	}
 	for _, slice := range oneOfSlice {
-		if slice != nil && len(slice) > 0 {
+		if len(slice) > 0 {
 			count++
 		}
 	}
@@ -363,7 +363,7 @@ func validateHTTPProbeConfig(config *Config) error {
 	if config.URL != "" {
 		urls = []string{config.URL}
 	}
-	if config.URLS != nil && len(config.URLS) > 0 {
+	if len(config.URLS) > 0 {
 		urls = append(urls, config.URLS...)
 	}
 

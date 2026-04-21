@@ -37,5 +37,8 @@ fmt:
 vet:
 	$(GO) vet ./...
 
+staticcheck:
+	$(GO) run honnef.co/go/tools/cmd/staticcheck@latest ./...
+
 tidy:
 	$(GO) mod tidy

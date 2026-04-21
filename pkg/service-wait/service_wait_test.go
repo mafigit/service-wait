@@ -46,6 +46,9 @@ func TestURLFlags(t *testing.T) {
 }
 
 func TestProbeHttpEndpoint(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
 	// Currently we only test successful cases, since you cannot know a testcontainers host and port in advance.
 	// Working around this constraint requires a lot of logic which is currently exceeding the scope of this tool.
 	ctx := context.Background()
@@ -56,6 +59,7 @@ func TestProbeHttpEndpoint(t *testing.T) {
 			wait.ForListeningPort("8080/tcp"),
 		),
 	)
+	require.NoError(t, err)
 	httpHttpsEchoContainer2, err := testcontainers.Run(
 		ctx, "mendhak/http-https-echo",
 		testcontainers.WithExposedPorts("8080/tcp"),
@@ -63,6 +67,7 @@ func TestProbeHttpEndpoint(t *testing.T) {
 			wait.ForListeningPort("8080/tcp"),
 		),
 	)
+	require.NoError(t, err)
 	port1, err := httpHttpsEchoContainer1.MappedPort(ctx, "8080/tcp")
 	if err != nil {
 		t.Error(err)
@@ -105,6 +110,9 @@ func TestProbeHttpEndpoint(t *testing.T) {
 }
 
 func TestProbePSQLEndpoint(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
 	// Currently we only test successful cases, since you cannot know a testcontainers host and port in advance.
 	// Working around this constraint requires a lot of logic which is currently exceeding the scope of this tool.
 	const user = "test"
@@ -123,6 +131,7 @@ func TestProbePSQLEndpoint(t *testing.T) {
 			"POSTGRES_DB":       database,
 		}),
 	)
+	require.NoError(t, err)
 
 	port, err := psqlContainer.MappedPort(ctx, "5432/tcp")
 	if err != nil {
@@ -158,6 +167,9 @@ func TestProbePSQLEndpoint(t *testing.T) {
 }
 
 func TestProbeMongoDBEndpoint(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping integration test in short mode")
+	}
 	// Currently we only test successful cases, since you cannot know a testcontainers host and port in advance.
 	// Working around this constraint requires a lot of logic which is currently exceeding the scope of this tool.
 	ctx := context.Background()
@@ -168,6 +180,7 @@ func TestProbeMongoDBEndpoint(t *testing.T) {
 			wait.ForListeningPort("27017/tcp"),
 		),
 	)
+	require.NoError(t, err)
 	port, err := mongoContainer.MappedPort(ctx, "27017/tcp")
 	if err != nil {
 		t.Error(err)
